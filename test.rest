@@ -1,0 +1,7 @@
+https://panorbit.in/api/users.json
+
+###
+https://panorbit.in/api/posts.json
+
+###
+https://panorbit.in/api/comments.json
