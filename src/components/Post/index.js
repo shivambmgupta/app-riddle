@@ -3,6 +3,10 @@ import { TouchableOpacity, Text, View, Image, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import ProfilePicture from '../ProfilePicture';
 import Styles from './Style';
+import * as Consts from '../../constants/constans';
+
+// Post component, the name is written as Hardcoded name because post json has no field name.
+// Name should be in posts.json fetching from the server.
 
 export default (props) => {
     const { post } = props;
@@ -34,14 +38,14 @@ export default (props) => {
                 <View style={Styles.bottomRowInnerContainer}>
                     <Image style={{ marginHorizontal: 5 }} source={require('../../assets/like.png')} />
                     <Image style={{ marginHorizontal: 5 }} source={require('../../assets/comment.png')} />
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Comments', { post })}>
-                        <Text style={[Styles.textColor, { marginHorizontal: 5 }]}>Comments</Text>
+                    <TouchableOpacity onPress={() => props.navigation.navigate(Consts.COMMENT_SCREEN, { post })}>
+                        <Text style={[Styles.textColor, { marginHorizontal: 5 }]}>{Consts.COMMENT}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={Styles.bottomRowInnerContainer}>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Comments', { post, mode: "NewComment" })}>
-                    <Text style={[Styles.textColor,{ marginHorizontal: 10}]}>Add a comment</Text>
+                        onPress={() => props.navigation.navigate(Consts.COMMENT_SCREEN, { post, mode: Consts.ADD_COMMENT_MODE })}>
+                    <Text style={[Styles.textColor,{ marginHorizontal: 10}]}>{Consts.ADD_A_COMMENT}</Text>
                     </TouchableOpacity>
                     <ProfilePicture source={{ uri: user?.profilepicture }} />
                 </View>

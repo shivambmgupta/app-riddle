@@ -6,6 +6,8 @@ import ProfilePicture from '../ProfilePicture';
 import Action from '../../redux/actions';
 import Styles from './Style';
 
+// The bottom sheet that holds the different registered accounts.
+
 export default (props) => {
     const users = useSelector(store => store.users);
     const dispatch = useDispatch();

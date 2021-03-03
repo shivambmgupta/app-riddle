@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProfilePicture from '../../components/ProfilePicture';
 import Action from '../../redux/actions';
 import Styles from './Style';
+import * as Consts from '../../constants/constans';
+
+// Add a comment functionality works, but new comments are volatile.
+// Since there's no backend, they'll be once you move out of screen
 
 export default (props) => {
     const [comments, addComments] = useState([]);
@@ -17,6 +21,7 @@ export default (props) => {
         dispatch(Action.fetchComments());
     }, []);
     useEffect(() => {
+        // Selecting comments that are related to this post.
         if (allComments && allComments.length) {
             let postRelatedComments = allComments.filter(comment => comment.postId === post?.id)
             addComments(postRelatedComments);
@@ -28,7 +33,7 @@ export default (props) => {
                 <TouchableOpacity onPress={() => props.navigation.goBack()}>
                     <Image source={require('../../assets/back.png')} />
                 </TouchableOpacity>
-                <Text style={Styles.headerTitleText}>Comments</Text>
+                <Text style={Styles.headerTitleText}>{Consts.COMMENT}</Text>
             </View>
             <View style={Styles.scrollViewParentContainer}>
                 <ScrollView>
@@ -49,8 +54,8 @@ export default (props) => {
                 <ProfilePicture source={{ uri: currentUser.profilepicture }}/>
                 <View style={Styles.textInputContainer}>
                     <TextInput 
-                        autoFocus={props.route.params.mode === "NewComment"}
-                        placeholder="Add a comment..."
+                        autoFocus={props.route.params.mode === Consts.ADD_COMMENT_MODE}
+                        placeholder={Consts.ADD_COMMENT_MODE}
                         onChangeText={(value) => addNewComment(value)}
                         value={newComment.length ? newComment : null}
                     />
@@ -72,7 +77,7 @@ export default (props) => {
                 >
                     <Text style={{
                         color: newComment.trim().length === 0 ? 'grey' : '#87CEEB'
-                    }}>Post</Text>
+                    }}>{Consts.POST}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

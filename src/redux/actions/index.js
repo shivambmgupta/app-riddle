@@ -5,11 +5,9 @@ export default class Action {
     static fetchPosts = () => async (dispatch) => {
         try {
             Services.getPosts((response) => {
-                if (response?.status === 200) {
-                    dispatch({ type: ActionTypes.FETCH_POSTS_SUCCESS, payload: response.data })
-                } else {
-                    dispatch({ type: ActionTypes.FETCH_POSTS_FAILURE })
-                }
+                response?.status === 200
+                ? dispatch({ type: ActionTypes.FETCH_POSTS_SUCCESS, payload: response.data })
+                : dispatch({ type: ActionTypes.FETCH_POSTS_FAILURE })
             })
         } catch (error) {
             dispatch({ type: ActionTypes.FETCH_POSTS_FAILURE })
@@ -18,11 +16,9 @@ export default class Action {
     static fetchUsers = () => async (dispatch) => {
         try {
             Services.getUsers(response => {
-                if (response?.status === 200) {
-                    dispatch({ type: ActionTypes.FETCH_USERS_SUCCESS, payload: response.data })
-                } else {
-                    dispatch({ type: ActionTypes.FETCH_USERS_FAILURE })
-                }
+                response?.status === 200
+                ? dispatch({ type: ActionTypes.FETCH_USERS_SUCCESS, payload: response.data })
+                : dispatch({ type: ActionTypes.FETCH_USERS_FAILURE })
             })
         } catch (error) {
             dispatch({ type: ActionTypes.FETCH_USERS_FAILURE })
@@ -31,11 +27,9 @@ export default class Action {
     static fetchComments = () => async (dispatch) => {
         try {
             Services.getComments(response => {
-                if (response?.status === 200) {
-                    dispatch({ type: ActionTypes.FETCH_COMMENTS_SUCCESS, payload: response.data })
-                } else {
-                    dispatch({ type: ActionTypes.FETCH_COMMENTS_FAILURE })
-                }
+                response?.status === 200
+                ? dispatch({ type: ActionTypes.FETCH_COMMENTS_SUCCESS, payload: response.data })
+                : dispatch({ type: ActionTypes.FETCH_COMMENTS_FAILURE })
             })
         } catch (error) {
             dispatch({ type: ActionTypes.FETCH_COMMENTS_FAILURE })   

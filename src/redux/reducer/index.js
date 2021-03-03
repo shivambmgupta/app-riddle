@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
             return { ...state, posts: [], errorFetchingPosts: true }
         case ActionTypes.FETCH_USERS_SUCCESS:
             return { ...state, users: action.payload?.users, currentUser: action.payload?.users?.[0], errorFetchingUser: false }
-        case ActionTypes.FETCH_USERS_SUCCESS:
+        case ActionTypes.FETCH_USERS_FAILURE:
             return { ...state, users: [], currentUser: null, errorFetchingUser: true }
         case ActionTypes.CURRENT_USER_SELECTED_CHANGED:
             return { ...state, currentUser: action.payload }

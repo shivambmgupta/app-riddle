@@ -15,6 +15,16 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    headerRightChild: { 
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    nameText: {
+        fontWeight: "bold",
+        color: "grey",
+        marginEnd: 5
+    },
     headerLeftChildImage: { marginHorizontal: 5 },
     scrollViewParent: { flex: 1 },
     scrollView: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { SafeAreaView, ScrollView, Text, View,Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Post from '../../components/Post';
 import ProfilePicture from '../../components/ProfilePicture';
@@ -7,12 +7,13 @@ import Actions from '../../redux/actions';
 import BottomContainer from '../../components/BottomContainer';
 import ActivityIndicator from '../../components/ActivityIndicator';
 import Styles from './Style';
+import { ERROR_FETCHING_POST } from '../../constants/constans'
 
-export default (props) =>  {
+export default (props) => {
     const refRBSheet = useRef();
     const dispatch = useDispatch();
-    const store = useSelector(state => state.posts);
-    const user = useSelector(state => state.currentUser);
+    const store = useSelector(store => store.posts);
+    const user = useSelector(store => store.currentUser);
     useEffect(() => {
         dispatch(Actions.fetchPosts());
     }, []);
@@ -24,11 +25,15 @@ export default (props) =>  {
                     <Image style={Styles.headerLeftChildImage} source={require('../../assets/hamburger.png')} />
                     <Image style={Styles.headerLeftChildImage} source={require('../../assets/logo.jpg')} />
                 </View>
-                <View>
-                    <TouchableOpacity onPress={() => refRBSheet.current.open() }>
-                        <ProfilePicture source={{ uri: user?.profilepicture }}/>
+                {
+                    user &&
+                    <TouchableOpacity onPress={() => refRBSheet.current.open()} style={Styles.headerRightChild}>
+                        <Text style={Styles.nameText}>{user.name}</Text>
+                        <View>
+                            <ProfilePicture source={{ uri: user.profilepicture }} />
+                        </View>
                     </TouchableOpacity>
-                </View>
+                }
             </View>
             <View style={Styles.scrollViewParent}>
                 <ScrollView contentContainerStyle={Styles.scrollView}>
@@ -36,20 +41,20 @@ export default (props) =>  {
                         store?.posts && store.posts?.length && !store.errorFetchingPosts &&
                         store.posts.map(post => {
                             return (
-                                <Post key={post.id} post={post} { ...props} />
+                                <Post key={post.id} post={post} {...props} />
                             );
                         })
                     }
                     {
-                        store?.errorFetchingPosts && 
+                        store?.errorFetchingPosts &&
                         <Text style={Styles.errorText}>
-                            Something went wrong, couldn't fetch your posts.
+                            {ERROR_FETCHING_POST}
                         </Text>
                     }
                     <View style={{ height: 80 }} />
                 </ScrollView>
             </View>
-            <BottomContainer refer={refRBSheet}/>
+            <BottomContainer refer={refRBSheet} />
         </SafeAreaView>
     );
 }
