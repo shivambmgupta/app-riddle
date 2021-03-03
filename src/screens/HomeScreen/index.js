@@ -28,7 +28,10 @@ export default (props) => {
                 {
                     user &&
                     <TouchableOpacity onPress={() => refRBSheet.current.open()} style={Styles.headerRightChild}>
-                        <Text style={Styles.nameText}>{user.name}</Text>
+                        <View style={{alignItems: "center"}}>
+                            <Text style={Styles.nameText}>{user.name}</Text>
+                            <Text style={Styles.nameText}>{user.username}</Text>
+                        </View>
                         <View>
                             <ProfilePicture source={{ uri: user.profilepicture }} />
                         </View>

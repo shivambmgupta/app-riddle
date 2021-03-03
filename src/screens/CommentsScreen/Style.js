@@ -38,5 +38,14 @@ export default StyleSheet.create({
         justifyContent: "flex-start",
         flexGrow: 1,
         marginHorizontal: 5
+    },
+    postButton: {
+        padding: 10,
+        borderRadius: 5,                
+        elevation: 10                
+    },
+    postText: {
+        color: "white",
+        fontWeight: "bold"
     }
 });

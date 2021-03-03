@@ -55,13 +55,20 @@ export default (props) => {
                 <View style={Styles.textInputContainer}>
                     <TextInput 
                         autoFocus={props.route.params.mode === Consts.ADD_COMMENT_MODE}
-                        placeholder={Consts.ADD_COMMENT_MODE}
+                        multiline={true}
+                        style={{
+                            maxWidth: '80%'
+                        }}
+                        placeholder={Consts.ADD_A_COMMENT}
                         onChangeText={(value) => addNewComment(value)}
                         value={newComment.length ? newComment : null}
                     />
                 </View>
                 <TouchableOpacity 
                     disabled={newComment.trim().length === 0}
+                    style={[Styles.postButton, {
+                        backgroundColor: newComment.trim().length === 0 ? 'grey' : '#87CEEB',
+                    }]}
                     onPress={() => {
                         let comment = {
                             postId: post?.Id,
@@ -75,9 +82,7 @@ export default (props) => {
                         addComments(updatedComments);
                     }}
                 >
-                    <Text style={{
-                        color: newComment.trim().length === 0 ? 'grey' : '#87CEEB'
-                    }}>{Consts.POST}</Text>
+                    <Text style={Styles.postText}>{Consts.POST}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
