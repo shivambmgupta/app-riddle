@@ -5,8 +5,7 @@ import ProfilePicture from '../ProfilePicture';
 import Styles from './Style';
 import * as Consts from '../../constants/constans';
 
-// Post component, the name is written as Hardcoded name because post json has no field name.
-// Name should be in posts.json fetching from the server.
+// Post component
 
 export default (props) => {
     const { post } = props;
@@ -15,7 +14,7 @@ export default (props) => {
         <TouchableOpacity style={Styles.outerContainer}>
             <View style={Styles.authorRow}>
                 {post.image && <ProfilePicture source={{ uri: post.image }} />}
-                <Text style={Styles.authorText}>{`by Hardcoded Name`}</Text>
+                {user && <Text style={Styles.authorText}>{`by ${user.username}`}</Text>}
             </View>
             <View style={{
                 marginBottom: 10

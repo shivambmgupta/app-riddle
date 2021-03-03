@@ -40,9 +40,9 @@ export default (props) => {
                     {
                         store?.posts && store.posts?.length && !store.errorFetchingPosts &&
                         store.posts.map(post => {
-                            return (
-                                <Post key={post.id} post={post} {...props} />
-                            );
+                            return post.userId === user?.id
+                            ? <Post key={post.id} post={post} {...props} />
+                            : null;
                         })
                     }
                     {
